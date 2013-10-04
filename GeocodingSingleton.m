@@ -60,13 +60,10 @@
                                 }
                                 else
                                 {
-                                    //create a string of the adress that is one line for the annotation views, and create one that is two lines for table view cells
+                                    //create a placemark, and do whatever you want with the address
                                     CLPlacemark *place = [placemarks objectAtIndex:0];
-                                    NSString *titleAddress = [NSString stringWithFormat:@"%@ %@, %@, %@", [place subThoroughfare], [place thoroughfare], [place locality], [place administrativeArea]];
+                                    NSString *geocodedAddress = [NSString stringWithFormat:@"%@ %@, %@, %@", [place subThoroughfare], [place thoroughfare], [place locality], [place administrativeArea]];
                                     mp.title = titleAddress;
-
-                                    NSString *geocodedAddress = [NSString stringWithFormat:@"%@ %@\n%@, %@", [place subThoroughfare], [place thoroughfare], [place locality], [place administrativeArea]];
-                                    mp.address = geocodedAddress;
                                     
                                     [self.geocoderQueue removeObject:mp];
                                 }
