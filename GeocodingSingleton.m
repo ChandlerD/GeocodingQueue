@@ -55,6 +55,7 @@
                             completionHandler:^(NSArray *placemarks, NSError *error) {
                                 if (error)
                                 {
+                                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                     NSLog(@"Geocoder failed with error: %@", error);
                                     [[NSNotificationCenter defaultCenter] postNotificationName:kGeocodeAdressFailed object:self userInfo:@{GeocodeFailedPin: mp, @"error": error}];
                                 }
@@ -64,13 +65,12 @@
                                     CLPlacemark *place = [placemarks objectAtIndex:0];
                                     NSString *geocodedAddress = [NSString stringWithFormat:@"%@ %@, %@, %@", [place subThoroughfare], [place thoroughfare], [place locality], [place administrativeArea]];
                                     mp.title = titleAddress;
-                                    
                                     [self.geocoderQueue removeObject:mp];
+                                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                 }
                             }];
     }
     self.isOperationRunning = NO;
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 @end
